@@ -1,7 +1,6 @@
 <?php
 session_start();
 $admin = $_SESSION['admin_name'];
-//echo $admin;
 if (empty($admin)) {
   header('location:../index.php');
 } else {
@@ -213,7 +212,7 @@ include_once '../model/category_retrieve.php';
 
      $.ajax({
          type: "POST",
-         url: "../../../update_category.php",
+         url: "../model/update_category.php",
          data: {
           category_id: category_id,
           n_category: n_category
