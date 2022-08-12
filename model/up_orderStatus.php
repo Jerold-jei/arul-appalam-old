@@ -1,13 +1,13 @@
 <?php
 
 include "../db/config.php";
-if (isset($_POST["update"])) {
+if (isset($_POST["get_order_status"])) {
 
 	
-    $id = mysqli_real_escape_string($conn,$_POST["order_id"]);	           
-	$order_status = mysqli_real_escape_string($conn, $_POST['order_status']);
+    $order_id = $_POST["get_order_status"]['order_id'];	            
+	$order_status = $_POST['get_order_status']['order_status'];
 
-    $querySelect = "SELECT * FROM orders where order_id =  $id";
+    $querySelect = "SELECT * FROM orders where order_id =  $order_id";
        
 		$ResultSelectStmt = mysqli_query($conn, $querySelect);
 		$fetchRecords = mysqli_fetch_assoc($ResultSelectStmt);
@@ -15,23 +15,12 @@ if (isset($_POST["update"])) {
               	
 		if($fetchRecords > 0){
 
-			$liveSqlQQ = "UPDATE orders SET status = '".$order_status."' where order_id = $id";
-			$update = mysqli_query($conn, $liveSqlQQ);	
-			
-			if($update)
-			{
-			    //echo "Category updated successfully";
-                header("Location: ../admin/order_details.php");
-			}else
-		    {
-			$displayErrMessage = "Sorry, Unable to update";
-		    }
-   
+			$liveSqlQQ = "UPDATE orders SET status = '".$order_status."' where order_id = $order_id";
+			$update = mysqli_query($conn, $liveSqlQQ);
+			echo $update;
         }else{
             echo "Error!!!";
     }
    
     
 }
-
-?>

@@ -6,9 +6,7 @@ if (isset($_GET["delete_id"])) {
 
     $id = $_GET["delete_id"];
    
-   
-    $querySelect = "SELECT * FROM products where product_id =  $id";
-       
+    $querySelect = "SELECT image_path FROM products where product_id =  $id";
 		$ResultSelectStmt = mysqli_query($conn, $querySelect);
 		$fetchRecords = mysqli_fetch_assoc($ResultSelectStmt);
 
