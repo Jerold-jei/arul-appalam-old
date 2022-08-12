@@ -37,13 +37,13 @@ $imgFile = file_get_contents($temp_name);
 $image = base64_encode($imgFile);
 
 $image_path = "../" . $product_base .  $newfilename . '.' . $fileFormat;
-//$folder = "$path/".$image_path; 
+$image_name = $newfilename . '.' . $fileFormat;
 
 move_uploaded_file($temp_name, $image_path);
 
 $image_path = $server_url . $product_base .  $newfilename . '.' . $fileFormat;
 
-$sql = "INSERT INTO products (product_id, category_id, category_name, product_name, description, prod_type, image, image_path, image_url, price, count_in_stock, created_date, quantity, minquantity) VALUES ('$product_id','$category_id','$category_name','$pname','$description', '$prod_type', '$imag','$product_url','$image_path','$price',' $stock',' $date','$quantity','$minquantity')";
+$sql = "INSERT INTO products (product_id, category_id, category_name, product_name, description, prod_type, image, image_name, image_url, price, count_in_stock, created_date, quantity, minquantity) VALUES ('$product_id','$category_id','$category_name','$pname','$description', '$prod_type', '$imag','$image_name','$image_path','$price',' $stock',' $date','$quantity','$minquantity')";
 if (mysqli_query($conn, $sql)) {
 
 
