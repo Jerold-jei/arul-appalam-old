@@ -23,8 +23,8 @@
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="category.php">Product Category</a></li>
-              <li class="nav-item"> <a class="nav-link" href="products.php">Products</a></li>
+              <li class="nav-item"> <a class="nav-link" href="category.php">Category Entry</a></li>
+              <li class="nav-item"> <a class="nav-link" href="products.php">Product Entry </a></li>
             </ul>
           </div>
         </li>
@@ -43,14 +43,15 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
             <i class="mdi  mdi-cart menu-icon"></i>
-            <span class="menu-title">Orders</span>
+            <span class="menu-title">Details</span>
             <i class="menu-arrow"></i>
           </a>
           <div class="collapse" id="ui-basic1">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="detail-table.php">Products Table</a></li>
-              <li class="nav-item"> <a class="nav-link" href="basic-table.php">Order History</a></li>
-              <li class="nav-item"> <a class="nav-link" href="basic-table.php">Order Status</a></li>
+              <li class="nav-item"> <a class="nav-link" href="product_details.php">Products Details</a></li>
+              <li class="nav-item"> <a class="nav-link" href="category_details.php">Category Details</a></li>
+              <li class="nav-item"> <a class="nav-link" href="order_details.php">Orders Details</a></li>
+              <!-- <li class="nav-item"> <a class="nav-link" href="shipping_details.php">Shipping Details</a></li>              -->
             </ul>
           </div>
         </li>
@@ -63,7 +64,7 @@
         <li class="nav-item">
           <a class="nav-link" href="payment_history.php">
             <i class="mdi mdi-information menu-icon"></i>
-            <span class="menu-title">Payment History</span>
+            <span class="menu-title">Payments</span>
           </a>
         </li>
         <li class="nav-item">

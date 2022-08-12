@@ -21,11 +21,11 @@ if (isset($_GET["delete_id"])) {
 			
 			if($rsDelete)
 			{
-			    echo "Record deleted successfully";
+				header("Location:../admin/banner.php");
 				exit();
 			}else
 		    {
-			$displayErrMessage = "Sorry, Unable to delete Image";
+			$displayErrMessage = "Sorry, Unable to delete Banner";
 		    }
    
         }else{

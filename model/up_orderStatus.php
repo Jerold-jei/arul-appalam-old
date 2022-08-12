@@ -4,10 +4,10 @@ include "../db/config.php";
 if (isset($_POST["update"])) {
 
 	
-    $id = mysqli_real_escape_string($conn,$_POST["category_id"]);	           
-	$n_category = mysqli_real_escape_string($conn, $_POST['n_category']);
+    $id = mysqli_real_escape_string($conn,$_POST["order_id"]);	           
+	$order_status = mysqli_real_escape_string($conn, $_POST['order_status']);
 
-    $querySelect = "SELECT * FROM category where category_id =  $id";
+    $querySelect = "SELECT * FROM orders where order_id =  $id";
        
 		$ResultSelectStmt = mysqli_query($conn, $querySelect);
 		$fetchRecords = mysqli_fetch_assoc($ResultSelectStmt);
@@ -15,13 +15,13 @@ if (isset($_POST["update"])) {
               	
 		if($fetchRecords > 0){
 
-			$liveSqlQQ = "UPDATE category SET category_name = '".$n_category."' where category_id = $id";
+			$liveSqlQQ = "UPDATE orders SET status = '".$order_status."' where order_id = $id";
 			$update = mysqli_query($conn, $liveSqlQQ);	
 			
 			if($update)
 			{
-			    echo "Category updated successfully";
-                header("Location: ../admin/category.php");
+			    //echo "Category updated successfully";
+                header("Location: ../admin/order_details.php");
 			}else
 		    {
 			$displayErrMessage = "Sorry, Unable to update";

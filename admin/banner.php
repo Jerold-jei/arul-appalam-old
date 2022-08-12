@@ -7,10 +7,6 @@ if (empty($admin)) {
 
   include_once '../db/config.php';
 include_once '../model/banner_retrieve.php';
-
-$sql = "SELECT image_id FROM banner image_id"; 
-$result = mysqli_query($conn, $sql);
-
 ?>
 
 <?php include_once 'components/header.php';?>
@@ -43,15 +39,15 @@ $result = mysqli_query($conn, $sql);
 
             
 
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width: auto; height:auto;">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width: 700px; height:auto;">
 
 
               <div class="carousel-inner">
                 <?php
 
                 $count = 0;
-                if($result->num_rows> 0){
-                  while($row = mysqli_fetch_array($result)) { ?>
+                if($result2->num_rows> 0){
+                  while($row = mysqli_fetch_array($result2)) { ?>
 
                   <div class="carousel-item <?php
                                             if ($count == 0) {
@@ -60,7 +56,7 @@ $result = mysqli_query($conn, $sql);
                                               echo " ";
                                             }
                                             ?>" data-interval="2000">
-                    <img src="../model/banner_retrieve.php?image_id=<?php echo $row["image_id"];  ?>" class="card-img-top" id="img" alt="...">
+                   <?php echo '<img src="'.$row["banner_url"].'"  class="card-img-top" id="img" alt="...">';?>
                    <a class="btn btn-link" style="text-align:right; width:auto; height:auto; color:#fff; font-size:20px; border:0; border-radius:100px; background: #CE034E; padding:10px; margin-top:10px; display: inline-flex;" href="../model/banner_delete.php?delete_id=<?php echo $row["image_id"];  ?>" onClick="return confirm('Are you sure to delete this Banner?')" type="button">
                    Delete <i class="mdi mdi-delete" style="font-size:20px; padding-left:5px;"></i></a>
                    </div>
@@ -72,17 +68,16 @@ $result = mysqli_query($conn, $sql);
                  }
                 ?>
               </div>
-
-
-
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+              
+              <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+              </a>
+                        
             </div>      
 
         </div>       
@@ -107,39 +102,7 @@ $result = mysqli_query($conn, $sql);
           $(".file-upload").addClass('active');
           $("#noFile").text(image.replace("C:\\fakepath\\", ""));
         }
-      });
-
-      $(document).ready(function() {
-
-        $("#submit").click(function() {
-
-          let image = $("#image").val();
-
-
-          if (image == '') {
-            alert("Please Add the Image.");
-            return false;
-          } else {
-
-            $.ajax({
-              type: "POST",
-              url: "../../../Image_upload.php",
-              data: {
-
-                image: image,
-              },
-              cache: false,
-              success: function(data) {
-                // alert(data);
-              },
-              error: function(xhr, status, error) {
-                console.error(xhr);
-              }
-            });
-          }
-        });
-
-      });
+      });      
     </script>    
 
     <script>

@@ -21,7 +21,7 @@ include_once '../model/category_retrieve.php';
               <div class="card">
                 <div class="card-body">
                   
-                  <h4 class="card-title">Category Name</h4>                                
+                  <h4 class="card-title">Category Entry</h4>                                
                   <form class="form-inline" method="POST" action = "../model/categoryinsert.php" enctype="multipart/form-data" >
                   
                     <label style="padding: 5px;">Enter Category Name</label>
@@ -48,11 +48,10 @@ include_once '../model/category_retrieve.php';
                       <thead>
                         <tr>
                          
-                          <th>Category ID</th>
+                          <th style="display:none;"></th>
                           <th>Category Name</th>
                           <th>Category Image</th>
-                          <th>Delete</th>
-                          <th>Update</th>
+                          <th>Edit</th>                      
                           
                         </tr>
                       </thead>
@@ -62,13 +61,13 @@ include_once '../model/category_retrieve.php';
                     foreach ($categories as $category) {
                         ?>
                         <tr>
-                          <td><?php echo $category['category_id']; ?> </td>
+                          <td style="display:none;"><?php echo $category['category_id']; ?> </td>
                           <td> <?php echo $category['category_name']; ?></td>
                           <td> <?php echo '<img src = "data:image;base64,'.base64_encode( $category['category_image']).'" alt ="image" style="width:100px; height:100px; border-radius:50px;">'; ?></td>
-                          <td><a class="btn btn-danger" type="button" style="width:auto; height:auto; font-size:15px; border:0; border-radius:100px; display: inline-flex;" href="../model/category_delete.php?delete_id=<?php echo $category['category_id'];?>" onClick="return confirm('Do you want to delete this Category?')" type="button">
-                          <i class="mdi mdi-delete" style="font-size:25px; color:#ffff;"></i></a></td>
-                          <td><a class="btn btn-success updatebtn" type="button" >
-                          <i class="mdi  mdi-package-up" style="font-size:25px"></i></a></td>
+                          <td><a class="btn" type="button" style="" href="../model/category_delete.php?delete_id=<?php echo $category['category_id'];?>" onClick="return confirm('Do you want to delete this Category?')" type="button">
+                          <i class="mdi mdi-delete" style="font-size:25px; color:#000; "></i></a>
+                          <a class="btn updatebtn" type="button" >
+                          <i class="mdi  mdi-package-up" style="font-size:25px; color:#000;"></i></a></td>
 
                         </tr>
                         <?php
@@ -141,40 +140,40 @@ include_once '../model/category_retrieve.php';
   </script>
   
   <script>
-    $(document).ready(function() {
+//     $(document).ready(function() {
  
- $("#submit").click(function() {
+//  $("#submit").click(function() {
 
-     let category_name = $("#category_name").val();
-     let category_image = $("#category_image").val();
+//      let category_name = $("#category_name").val();
+//      let category_image = $("#category_image").val();
      
 
-     if(category_name ==''|| category_image =='') {
-         alert("Please fill all fields.");
-         return false;
-     }
+//      if(category_name ==''|| category_image =='') {
+//          alert("Please fill all fields.");
+//          return false;
+//      }
 
-     $.ajax({
-         type: "POST",
-         url: "../../../categoryinsert.php",
-         data: {
-          category_name: category_name,
-          category_image: category_image
+//      $.ajax({
+//          type: "POST",
+//          url: "../model/categoryinsert.php",
+//          data: {
+//           category_name: category_name,
+//           category_image: category_image
 
-         },
-         cache: false,
-         success: function(data) {
+//          },
+//          cache: false,
+//          success: function(data) {
              
-         },
-         error: function(xhr, status, error) {
-             console.error(xhr);
-         }
-     });
+//          },
+//          error: function(xhr, status, error) {
+//              console.error(xhr);
+//          }
+//      });
       
- });
+//  });
  
 
-});
+// });
   </script>
   <script>
   
@@ -197,39 +196,39 @@ include_once '../model/category_retrieve.php';
     });
   });
 
-    $(document).ready(function() {
+//     $(document).ready(function() {
  
- $("#update").click(function(e) {
+//  $("#update").click(function(e) {
 
      
-     let n_category = $("#n_category").val();
-     let category_id = $("#category_id").val();
+//      let n_category = $("#n_category").val();
+//      let category_id = $("#category_id").val();
      
-     if(n_category =='') {
-         alert("Please fill the field.");
-         return false;
-     }
+//      if(n_category =='') {
+//          alert("Please fill the field.");
+//          return false;
+//      }
 
-     $.ajax({
-         type: "POST",
-         url: "../model/update_category.php",
-         data: {
-          category_id: category_id,
-          n_category: n_category
+//      $.ajax({
+//          type: "POST",
+//          url: "../model/update_category.php",
+//          data: {
+//           category_id: category_id,
+//           n_category: n_category
 
-         },
-         cache: false,
-         success: function(data) {
+//          },
+//          cache: false,
+//          success: function(data) {
              
-         },
-         error: function(xhr, status, error) {
-             console.error(xhr);
-         }
-     });
+//          },
+//          error: function(xhr, status, error) {
+//              console.error(xhr);
+//          }
+//      });
 
           
- });
-});
+//  });
+// });
   </script>  
 </body>
 

@@ -12,10 +12,12 @@ include "../db/config.php";
     $pname = mysqli_real_escape_string($conn, $_POST['Pname']);
     $description = mysqli_real_escape_string($conn, $_POST['Description']);
     $prod_type = mysqli_real_escape_string($conn, $_POST['prod_type']);
+
     $img = mysqli_real_escape_string($conn, $_FILES['image']["name"]);
     $imag = addslashes(file_get_contents($_FILES['image']['tmp_name']));
     $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-    $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]);      
+    $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]); 
+         
     $price = mysqli_real_escape_string($conn, $_POST['Price']);
     $stock = mysqli_real_escape_string($conn, $_POST['Stock']);
     $date = mysqli_real_escape_string($conn, $_POST['Date']);
@@ -40,7 +42,7 @@ include "../db/config.php";
         move_uploaded_file($temp_name, $image_path);           
     
 
-        $sql = "INSERT INTO products (product_id, category_id, category_name, product_name, description, prod_type, image, image_path, price, count_in_stock, created_date, quantity, minquantity) VALUES ('$product_id','$category_id','$category_name','$pname','$description', '$prod_type', '$imag','$folder','$price',' $stock',' $date','$quantity','$minquantity')";
+        $sql = "INSERT INTO products (product_id, category_id, category_name, product_name, description, prod_type, image, image_path, image_url, price, count_in_stock, created_date, quantity, minquantity) VALUES ('$product_id','$category_id','$category_name','$pname','$description', '$prod_type', '$imag','$image_path','$folder','$price',' $stock',' $date','$quantity','$minquantity')";
                     if(mysqli_query($conn, $sql)){
 
                    

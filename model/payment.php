@@ -1,8 +1,6 @@
 <?php
 
-$query = "SELECT orders.order_id, customers.*, payments.*
-          FROM orders, customers, payments
-          Where orders.customer_id = customers.customer_id";
+$query = "SELECT * FROM payments";
 
     $result = $conn->query($query);
     $payment_count = mysqli_num_rows( $result );

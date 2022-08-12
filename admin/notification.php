@@ -61,7 +61,7 @@ include_once '../model/retrieve_notification.php';
                     <table class="table table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th>Notifications ID </th>
+                          <th style="display:none;">Notifications ID </th>
                           <th>Notifications Title </th>
                           <th>Notification</th>
                           <th>Image</th>
@@ -74,7 +74,7 @@ include_once '../model/retrieve_notification.php';
                        foreach ($notifications as $notification) {
                         ?>
                         <tr>
-                          <td><?php echo $notification["notification_id"]; ?></td>
+                          <td style="display:none;"><?php echo $notification["notification_id"]; ?></td>
                           <td><?php echo $notification["notification_title"]; ?></td>
                           <td><?php echo $notification["notification"]; ?></td>
                           <td><?php echo '<img src = "data:image;base64,'.base64_encode($notification['notification_image']).'" alt ="image" style="width:100px; height:100px;">'; ?></td>
@@ -110,11 +110,13 @@ include_once '../model/retrieve_notification.php';
 
                         <div class="form-group">
                             <label> Notification Message </label>
-                            <input type="text" name="n_category" id="n_category" class="form-control"
-                                placeholder="Enter Category Name">
+                            <input type="text" name="n_category" id="n_category" class="form-control">
                         </div>
 
-                        <div class="form-group">                                                        
+                        <div class="form-group">                                  
+                            <label> Notification Image </label>  
+                            <img src = "<?php echo $notification['image_path'];?>" name="image" id="image" alt ="image" style="width:100px; height:100px;">
+
                         </div>
                        
                     </div>
@@ -199,9 +201,9 @@ include_once '../model/retrieve_notification.php';
 
       console.log(data);
 
-      $('#category_id').val(data[0]);
-      $('#n_category').val(data[1]);
-      $('#image').val(data[2]);
+      $('#category_id').val(data[1]);
+      $('#n_category').val(data[2]);
+      $('#image').val(data[3]);
       
     });
   });

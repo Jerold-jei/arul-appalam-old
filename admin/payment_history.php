@@ -26,14 +26,13 @@ include_once '../model/payment.php';
                     <table class="table table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th>S NO</th>
-                          <th>Customer ID</th>
+                          <th>S NO</th>                         
                           <th>Customer Name</th>
                           <th>Customer Email ID</th>
                           <th>Payment Status</th>
                           <th>Payment ID</th>
                           <th>Payment Date</th>
-                          <th>Order ID</th>
+                        
                         </tr>
                       </thead>
                       <tbody>
@@ -42,14 +41,13 @@ include_once '../model/payment.php';
                        foreach ($payments as $payment) {
                         ?>
                         <tr>
-                          <td><?php echo $payment["id"]; ?></td>
-                          <td><?php echo $payment["customer_id"]; ?></td>
+                          <td><?php echo $payment["id"]; ?></td>                        
                           <td><?php echo $payment["customer_name"]; ?></td>
                           <td><?php echo $payment["customer_email"]; ?></td>
                           <td><?php echo $payment["payment_status"]; ?></td>
                           <td><?php echo $payment['payment_id']; ?></td>
                           <td><?php echo $payment["added_on"]; ?></td>
-                          <td><?php echo $payment["order_id"]; ?></td>
+                          
                         </tr>    
                         <?php
                       }
