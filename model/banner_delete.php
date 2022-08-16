@@ -1,5 +1,5 @@
 <?php
-
+require_once('../db/base_url.php');
 include_once "../db/config.php";
 
 
@@ -8,29 +8,23 @@ if (isset($_GET["delete_id"])) {
     $id = $_GET["delete_id"];
    
    
-    $querySelect = "SELECT * FROM banner where image_id =  $id";
+    $querySelect = "SELECT image_name FROM banner where image_id =  $id";
        
 		$ResultSelectStmt = mysqli_query($conn, $querySelect);
-		$fetchRecords = mysqli_fetch_assoc($ResultSelectStmt);
+		$banner = mysqli_fetch_assoc($ResultSelectStmt);
 
               	
-		if(unlink($fetchRecords['filepath']))
-		{
+		if (unlink("../" . $banner_base . $banner['image_name'])) {
 			$liveSqlQQ = "DELETE from banner where image_id = $id";
-			$rsDelete = mysqli_query($conn, $liveSqlQQ);	
-			
-			if($rsDelete)
-			{
-				header("Location:../admin/banner.php");
-				exit();
-			}else
-		    {
-			$displayErrMessage = "Sorry, Unable to delete Banner";
-		    }
-   
-        }else{
-            echo "No Image";
-    }
+			$rsDelete = mysqli_query($conn, $liveSqlQQ);
+			if ($rsDelete) {
+				header("Location: ../admin/banner.php");
+			} else {
+				echo "Banner is not deleted from database";
+			}
+		} else {
+			echo "Banner is not deleted from folder";
+		}
    
     
 }

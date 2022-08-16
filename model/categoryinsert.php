@@ -1,5 +1,6 @@
 <?php
 
+require_once('../db/base_url.php');
 include "../db/config.php";
 
 if(isset($_POST['submit'])) {
@@ -10,9 +11,6 @@ if(isset($_POST['submit'])) {
         
         $imageProperties = getimageSize($_FILES['category_image']['tmp_name']);
 
-        $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-        $path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]);        
-       
         $temp_name = $_FILES["category_image"]["tmp_name"];
     
         $getFormat = explode(".",  $img);
@@ -24,14 +22,15 @@ if(isset($_POST['submit'])) {
         $newfilename = round(microtime(true)) ;
         $category_id = rand();
 
-        $image_path = "assets/category/" .  $newfilename. '.'.$fileFormat;
-        $folder = "$path/".$image_path;
+        $image_path = "../" . $category_base .  $newfilename . '.' . $fileFormat;
+        $category_image_name = $newfilename . '.' . $fileFormat;
 
         move_uploaded_file($temp_name, $image_path);
 
+        $image_path = $server_url . $category_base .  $newfilename . '.' . $fileFormat;
         
-        $sql = "INSERT INTO category (no_of_data, category_id, category_name, category_image, image_path, image_url)
-        VALUES('','{$category_id}','{$category_name}', '{$imgData}','{$image_path}','{$folder}')";
+        $sql = "INSERT INTO category (no_of_data, category_id, category_name, category_image, category_image_name, image_url)
+        VALUES('','{$category_id}','{$category_name}', '{$imgData}','{$category_image_name}','{$image_path}')";
 
         if(mysqli_query($conn, $sql)){
 

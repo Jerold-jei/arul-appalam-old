@@ -12,12 +12,8 @@ if ($result->num_rows > 0) {
 $pname = mysqli_real_escape_string($conn, $_POST['Pname']);
 $description = mysqli_real_escape_string($conn, $_POST['Description']);
 $prod_type = mysqli_real_escape_string($conn, $_POST['prod_type']);
-
 $img = mysqli_real_escape_string($conn, $_FILES['image']["name"]);
 $imag = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-//$path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-//$path .=$_SERVER["SERVER_NAME"]. dirname($_SERVER["PHP_SELF"]); 
-
 $price = mysqli_real_escape_string($conn, $_POST['Price']);
 $stock = mysqli_real_escape_string($conn, $_POST['Stock']);
 $date = mysqli_real_escape_string($conn, $_POST['Date']);

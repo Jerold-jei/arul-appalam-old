@@ -49,7 +49,7 @@ if (empty($admin)) {
                               <td><?php echo $product["product_name"]; ?></td>
                               <td><?php echo $product["description"]; ?></td>
                               <td><?php echo $product["prod_type"]; ?></td>
-                              <td><?php echo '<img src = "data:image;base64,' . base64_encode($product['image']) . '" alt ="image" style="width:100px; height:100px;">'; ?></td>
+                              <td><?php echo '<img src = "' . ($product['image_url']) . '" alt ="image" style="width:100px; height:100px;">'; ?></td>
                               <td><?php echo $product["price"]; ?></td>
                               <td><?php echo $product["count_in_stock"]; ?></td>
                               <td><?php echo $product["quantity"]; ?></td>
@@ -87,15 +87,15 @@ if (empty($admin)) {
 
                               <div class="form-group">
                                 <label> Product Name </label>
-                                <input type="text" name="n_product" id="n_product" class="form-control" placeholder="Enter Product Name">
+                                <input type="text" name="product" id="product" class="form-control" placeholder="Enter Product Name">
                               </div>
                               <div class="form-group">
                                 <label> Description </label>
-                                <input type="text" name="n_description" id="n_description" class="form-control" placeholder="Enter Description">
+                                <input type="text" name="description" id="description" class="form-control" placeholder="Enter Description">
                               </div>
                               <div class="form-group">
                                 <label> Product Type </label>
-                                <input type="text" name="n_prod_type" id="n_prod_type" class="form-control" placeholder="Enter Product Type">
+                                <input type="text" name="prod_type" id="prod_type" class="form-control" placeholder="Enter Product Type">
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputName1">Update the Product Type</label>
@@ -114,21 +114,25 @@ if (empty($admin)) {
 
                               <div class="form-group">
                                 <label>Product Image</label>
-                                <input type="file" name="n_image" id="n_image" class="file-upload-default" Required accept="image/png, image/jpeg">
+                                <input type="file" name="p_image" id="p_image" class="file-upload-default" Required accept="image/png, image/jpeg">
                                 <div class="input-group col-xs-12">
-                                  <input type="text" class="form-control file-upload-info" name="n_image" id="n_image" disabled placeholder="Upload Image">
+                                  <input type="text" class="form-control file-upload-info" name="p_image" id="p_image" disabled placeholder="Upload Image">
                                   <span class="input-group-append">
                                     <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                                   </span>
                                 </div>
                               </div>
                               <div class="form-group">
+                                  <input type="hidden" name="old_image_name" id="old_image_name" class="form-control" value="<?php echo $product['image_name']; ?>">
+                              </div>
+
+                              <div class="form-group">
                                 <label> Price </label>
-                                <input type="text" name="n_price" id="n_price" class="form-control" placeholder="Enter Price">
+                                <input type="text" name="price" id="price" class="form-control" placeholder="Enter Price">
                               </div>
                               <div class="form-group">
                                 <label> In Stock </label>
-                                <input type="text" name="n_stock" id="n_stock" class="form-control" placeholder="Enter Stock Count">
+                                <input type="text" name="stock" id="stock" class="form-control" placeholder="Enter Stock Count">
                               </div>
 
                             </div>
@@ -194,12 +198,12 @@ if (empty($admin)) {
             console.log(data);
 
             $('#product_id').val(data[1]);
-            $('#n_product').val(data[2]);
-            $('#n_description').val(data[3]);
-            $('#n_prod_type').val(data[4]);
-            $('#n_image').val(data[5]);
-            $('#n_price').val(data[6]);
-            $('#n_stock').val(data[7]);
+            $('#product').val(data[2]);
+            $('#description').val(data[3]);
+            $('#prod_type').val(data[4]);
+            $('#p_image').val(data[5]);
+            $('#price').val(data[6]);
+            $('#stock').val(data[7]);
 
           });
         });

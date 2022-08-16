@@ -3,25 +3,33 @@ require_once('../db/base_url.php');
 include "../db/config.php";
 if (isset($_POST["update"])) {
 
-	$id = mysqli_real_escape_string($conn, $_POST["product_id"]);
-	$n_product = mysqli_real_escape_string($conn, $_POST['n_product']);
-	$n_description = mysqli_real_escape_string($conn, $_POST["n_description"]);
-	$u_prodtype = mysqli_real_escape_string($conn, $_POST['u_prodtype']);
+	$id = $_POST["product_id"];
+	$product = $_POST['product'];
+	$description = $_POST["description"];
+	$u_prodtype = $_POST['u_prodtype'];
 
-	$n_image = mysqli_real_escape_string($conn, $_FILES['n_image']["name"]);
-	$imag = addslashes(file_get_contents($_FILES['n_image']['tmp_name']));
-	$n_price = mysqli_real_escape_string($conn, $_POST['n_price']);
-	$n_stock = mysqli_real_escape_string($conn, $_POST["n_stock"]);
+	$new_image = $_FILES['p_image']["name"];
+	//$imag = addslashes(file_get_contents($_FILES['p_image']['tmp_name']));
+
+	$old_image =  $_POST['old_image_name'];
+	$price = $_POST['price'];
+	$stock = $_POST["stock"];
+
+	if($new_image != ''){
+		$update_image = $_FILES['p_image']["name"];
+	}else{
+		$update_image = $old_image;
+	}
 
 	$newfilename = round(microtime(true));
 
-	$temp_name = $_FILES["n_image"]["tmp_name"];
+	$temp_name = $_FILES["p_image"]["tmp_name"];
 
-	$getFormat = explode(".", $n_image);
+	$getFormat = explode(".", $new_image);
 	$fileFormat = end($getFormat);
 
 	$imgFile = file_get_contents($temp_name);
-	$n_image = base64_encode($imgFile);
+	$new_image = base64_encode($imgFile);
 
 	$image_path = "../" . $product_base .  $newfilename . '.' . $fileFormat;
 	$image_name = $newfilename . '.' . $fileFormat;

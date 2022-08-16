@@ -23,7 +23,14 @@ if (empty($admin)) {
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card" id="t-tab3" role="tabpanel">
+
+            <div class="col-md-12 head" style="margin-bottom: 20px; ">
+              <div class="float-right">
+              <a class="btn btn-primary btn-lg" href="../model/order_export.php" role="button" style = "font-size:20px;">Export <i class="mdi mdi-download" style = "font-size:20px;"></i></a>               
+              </div>
+            </div>
+
+           <div class="col-lg-12 grid-margin stretch-card" id="t-tab3" role="tabpanel">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Order Details</h4>
