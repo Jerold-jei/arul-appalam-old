@@ -9,30 +9,4 @@ $query ="SELECT orders.*, customers.*, payments.payment_status
          $orders_count = mysqli_num_rows( $result3 );
          $orders = mysqli_fetch_all($result3, MYSQLI_ASSOC);
 
-     
-      
-      
-                      
-          // if(unlink($fetchRecords['image_path']))
-          // {
-          //   $liveSqlQQ = "DELETE from category where category_id = $id";
-          //   $rsDelete = mysqli_query($conn, $liveSqlQQ);	
-            
-          //   if($rsDelete)
-          //   {
-          //       echo "Record deleted successfully";
-          //             header("Location: ../admin/category.php");
-          //     //exit();
-          //   }else
-          //     {
-          //   $displayErrMessage = "Sorry, Unable to delete Image";
-          //     }
-         
-          //     }else{
-          //         echo "No Image";
-          // }
-         
-          
-      
-    
 ?>

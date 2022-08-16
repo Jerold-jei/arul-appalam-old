@@ -15,6 +15,9 @@ if (empty($admin)) {
 
 ?>
   <?php include_once 'components/header.php'; ?>
+  <style>
+
+  </style>
   <div class="container-scroller d-flex">
     <?php include_once 'components/side_bar.php'; ?>
     <div class="container-fluid page-body-wrapper">
@@ -26,11 +29,11 @@ if (empty($admin)) {
 
             <div class="col-md-12 head" style="margin-bottom: 20px; ">
               <div class="float-right">
-              <a class="btn btn-primary btn-lg" href="../model/order_export.php" role="button" style = "font-size:20px;">Export <i class="mdi mdi-download" style = "font-size:20px;"></i></a>               
+                <a class="btn btn-primary btn-lg" href="../model/order_export.php" role="button" style="font-size:20px;">Export <i class="mdi mdi-download" style="font-size:20px;"></i></a>
               </div>
             </div>
 
-           <div class="col-lg-12 grid-margin stretch-card" id="t-tab3" role="tabpanel">
+            <div class="col-lg-12 grid-margin stretch-card" id="t-tab3" role="tabpanel">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Order Details</h4>
@@ -45,7 +48,7 @@ if (empty($admin)) {
                           <th>Price</th>
                           <th>Quantity</th>
                           <th>Appalam Image</th>
-                          <th>Order Status</th>
+                          <th colspan="2">Order Status</th>
 
                         </tr>
                       </thead>
@@ -62,9 +65,33 @@ if (empty($admin)) {
                               <td><?php echo $order['category_name']; ?></td>
                               <td><?php echo $order['price']; ?></td>
                               <td><?php echo $order['quantity']; ?></td>
-                              <td><?php echo '<img src = "' . $order['appalam_image'] . '" alt ="image" style="width:100px; height:100px; border-radius:50px;">'; ?></td>
-                              <td><?php echo $order['status']; ?><button class="btn" data-toggle="modal" data-target="#orderStatus" onclick="set_order_id('<?php echo $order['order_id']; ?>')">
-                                  <i class="mdi  mdi-package-up" style="font-size:25px; color:#000;"></i></button></td>
+                              <td onClick="set_papad_image('<?php echo $order['order_id']; ?>')"><?php echo '<img data-toggle="modal" data-target="#Image_flip" id="image" src = "' . $order['appalam_image'] . '" alt ="image" style="width:100px; height:100px; border-radius:50px;">'; ?></td>
+
+                              <td> <?php
+                                    switch ($order['status']) {
+                                      case "ordered":
+                                        echo "<span class='text-primary font-weight-bold'>" . $order['status'] . "</span>";
+                                        break;
+                                      case "dispatched":
+                                        echo "<span class='text-warning font-weight-bold'>" . $order['status'] . "</span>";
+                                        break;
+                                      case "delivered":
+                                        echo "<span class='text-success font-weight-bold'>" . $order['status'] . "</span>";
+                                        break;
+                                      case "holded":
+                                        echo "<span class='text-danger font-weight-bold'>" . $order['status'] . "</span>";
+                                        break;
+                                      default:
+                                        echo "";
+                                    }
+                                    ?>
+                              </td>
+                              <td>
+                                <span class="btn" data-toggle="modal" data-target="#orderStatus" onclick="set_order_id('<?php echo $order['order_id']; ?>')">
+                                  <i class="mdi mdi-pencil"></i>
+                                </span>
+                              </td>
+
                             </tr>
                         <?php
                           }
@@ -154,6 +181,31 @@ if (empty($admin)) {
               </div>
             </div>
           </div>
+
+          <div class="modal fade bd-example" id="Image_flip" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"> Print Appalam Image </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="p_image">
+                  <img id="papad_image" alt="image">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <span id="order-id" class="d-none"></span>
+                  <button type="submit" onclick="print('p_image')" class="btn btn-primary">Print Image</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
 
@@ -184,6 +236,27 @@ if (empty($admin)) {
           })
         }
 
+        function set_papad_image(modal_id) {
+          $.post('../model/papad_image.php', {
+            get_papad_image: modal_id
+          }, (response) => {
+            let papad_image = $.parseJSON(response);
+            $('#papad_image').attr("src", papad_image[0].appalam_image);
+
+            let count = 0;
+            $("#papad_image").on("click", function() {
+              count++;
+              if (count == 1) {
+                $(this).clone().insertAfter(this);
+                $(this).css("transform", "rotateY(180deg)");
+                $(this).attr("src", papad_image[0].appalam_image);
+              } else {
+                console.log(count);
+              }
+            })
+          })
+        }
+
         function set_order_id(order_id) {
           $('#order-id').text(order_id);
         }
@@ -205,7 +278,7 @@ if (empty($admin)) {
               }
             })
 
-          }else{
+          } else {
             alert("Please choose any option");
           }
 
@@ -240,6 +313,18 @@ if (empty($admin)) {
 
         //   });
         // });
+        function print(p_image) {
+          var mywindow = window.open();
+          var content = document.getElementById(p_image).innerHTML;
+          var realContent = document.body.innerHTML;
+          mywindow.document.write(content);
+          mywindow.document.close(); // necessary for IE >= 10
+          mywindow.focus(); // necessary for IE >= 10*/
+          mywindow.print();
+          document.body.innerHTML = realContent;
+          mywindow.close();
+          return true;
+        }
       </script>
 
       </body>
