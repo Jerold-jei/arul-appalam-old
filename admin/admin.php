@@ -26,10 +26,7 @@ foreach ($admins as $admin1) {
                   <div class="table-responsive pt-3">
                     <table class="table table-bordered">
                       <thead>
-                        <tr>
-                          <th>
-                            Admin ID
-                          </th>
+                        <tr>                          
                           <th>
                             Admin Name
                           </th>
@@ -41,10 +38,8 @@ foreach ($admins as $admin1) {
                           </th>                        
                         </tr>
                       </thead>
-                      <tbody>
-                      
-                        <tr>
-                        <td><?php echo $admin1["admin_id"]; ?></td>
+                      <tbody>                      
+                        <tr>                        
                           <td><?php echo $admin1["admin_name"]; ?></td>
                           <td><?php echo $admin1["username"]; ?></td>
                           <td><?php echo $admin1["phone"]; ?></td>

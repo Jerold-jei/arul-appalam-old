@@ -316,14 +316,15 @@ if (empty($admin)) {
         function print(p_image) {
           var mywindow = window.open();
           var content = document.getElementById(p_image).innerHTML;
-          var realContent = document.body.innerHTML;
+          //var realContent = document.body.innerHTML;         
           mywindow.document.write(content);
           mywindow.document.close(); // necessary for IE >= 10
           mywindow.focus(); // necessary for IE >= 10*/
           mywindow.print();
-          document.body.innerHTML = realContent;
-          mywindow.close();
+          //document.body.innerHTML = realContent;
+          //mywindow.close();
           return true;
+        
         }
       </script>
 
